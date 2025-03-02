@@ -4,11 +4,56 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h1 class="text-center">Welcome to Assignment 3</h1>
+<h2 class="text-center">Customer Manager</h2>
+
+<!-- Khu vực tìm kiếm và tải lên tệp -->
+<div class="search-upload-section">
+    <form method="get" class="form-inline">
+        <label for="discountRate">Discount rate:</label>
+        <input type="number" id="discountRate" name="discountRate" min="0" max="100" class="form-control" />
+        <button type="submit" class="btn btn-secondary">Search</button>
+    </form>
+
+    <form method="post" enctype="multipart/form-data" class="form-inline">
+        <input type="file" name="file" accept=".json,.xml" class="form-control-file" />
+        <button type="submit" asp-page-handler="AddJson" class="btn btn-secondary">Add Customers in Json File</button>
+        <button type="submit" asp-page-handler="AddXml" class="btn btn-secondary">Add Customers in XML File</button>
+    </form>
 </div>
-@foreach(var p in Model.Products)
-{
-    <p>@p.Name</p>
-}
+
+<!-- Tóm tắt danh sách khách hàng -->
+<p>List of Customer count: @Model.Customers.Count</p>
+
+<!-- Bảng danh sách khách hàng -->
+<h3>List view customer below:</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>CustomerName</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>DiscountRate</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model.Customers)
+        {
+            <tr>
+                <td>@customer.CustomerName</td>
+                <td>@customer.Address</td>
+                <td>@customer.Phone</td>
+                <td>@customer.DiscountRate</td>
+                <td>
+                    <a asp-page="/Edit" asp-route-id="@customer.CustomerId">Edit</a> |
+                    <a asp-page="/Details" asp-route-id="@customer.CustomerId">Details</a> |
+                    <a asp-page="/Delete" asp-route-id="@customer.CustomerId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Liên kết tạo khách hàng mới -->
+<a asp-page="/Create">Create New</a>

@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{D4133804-8AB9-4F7C-B69A-447130E44A54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{D4133804-8AB9-4F7C-B69A-447130E44A54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{140DDBBB-080A-4BBB-BEEE-4E23B8B36674}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{140DDBBB-080A-4BBB-BEEE-4E23B8B36674}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{B187A310-3243-41EB-AD17-9DD45C116A41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{B187A310-3243-41EB-AD17-9DD45C116A41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentNameRazorPages", "StudentNameRazorPages\StudentNameRazorPages.csproj", "{AFE80A72-EAF5-46AA-8E96-DF42D330DBE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentNameRazorPages", "StudentNameRazorPages\StudentNameRazorPages.csproj", "{AFE80A72-EAF5-46AA-8E96-DF42D330DBE3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

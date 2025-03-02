@@ -1,0 +1,14 @@
+﻿<Customers>
+	<Customer>
+		<Name>Nguyen Van A</Name>
+		<DiscountRate>10</DiscountRate>
+	</Customer>
+	<Customer>
+		<Name>Tran Thi B</Name>
+		<DiscountRate>20</DiscountRate>
+	</Customer>
+	<Customer>
+		<Name>Le Van C</Name>
+		<DiscountRate>30</DiscountRate>
+	</Customer>
+</Customers>

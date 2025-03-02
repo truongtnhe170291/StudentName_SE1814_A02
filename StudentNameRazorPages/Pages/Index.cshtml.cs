@@ -14,10 +14,10 @@ namespace StudentNameRazorPages.Pages
             _logger = logger;
             this.context = context;
         }
-        public List<Product> Products { get; set; }
+        public List<Customer> Customers { get; set; }
         public void OnGet()
         {
-            Products = context.Products.ToList();
+            Customers = context.Customers.ToList();
         }
     }
 }

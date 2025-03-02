@@ -1,4 +1,5 @@
 ﻿using DataAccess.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,30 @@ namespace Repository
         public CustomerRepository(Ass2SignalRRazorPagesContext context)
         {
             _context = context;
+        }
+        public async Task AddCustomer(Customer customer)
+        {
+            _context.Customers.Add(customer);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateCustomer(Customer customer)
+        {
+            _context.Customers.Update(customer);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<Customer?> GetCustomerById(string id)
+        {
+            return await _context.Customers.FindAsync(id);
+        }
+
+        public async Task<string> GetFinalIdCustomer()
+        {
+            var Custom = await _context.Customers.OrderByDescending(c => c.CustomerId).FirstOrDefaultAsync();
+            if (Custom == null)
+                return "1";
+            return Custom.CustomerId;
         }
     }
 }
