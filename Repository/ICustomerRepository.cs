@@ -13,5 +13,6 @@ namespace Repository
         Task UpdateCustomer(Customer customer);
         Task<Customer?> GetCustomerById(string id);
         Task<string> GetFinalIdCustomer();
-    }
+		Task DeleteCustomer(string id);
+	}
 }

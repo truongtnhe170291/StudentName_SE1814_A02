@@ -40,5 +40,15 @@ namespace Repository
                 return "1";
             return Custom.CustomerId;
         }
-    }
+
+		public async Task DeleteCustomer(string id)
+		{
+            var Customer = await GetCustomerById(id);
+            if (Customer != null)
+            {
+                _context.Customers.Remove(Customer);
+				await _context.SaveChangesAsync();
+			}
+		}
+	}
 }

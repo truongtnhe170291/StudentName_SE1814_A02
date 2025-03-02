@@ -1,14 +1,21 @@
-﻿<Customers>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Customers>
 	<Customer>
-		<Name>Nguyen Van A</Name>
-		<DiscountRate>10</DiscountRate>
+		<CustomerName>Nguyen Van A</CustomerName>
+		<Address>HD</Address>
+		<Phone>1230987</Phone>
+		<DiscountRate>50</DiscountRate>
 	</Customer>
 	<Customer>
-		<Name>Tran Thi B</Name>
-		<DiscountRate>20</DiscountRate>
+		<CustomerName>Tran Thi B</CustomerName>
+		<Address>HCM</Address>
+		<Phone>1200003</Phone>
+		<DiscountRate>100</DiscountRate>
 	</Customer>
 	<Customer>
-		<Name>Le Van C</Name>
-		<DiscountRate>30</DiscountRate>
+		<CustomerName>Le Van C</CustomerName>
+		<Address>HANOI</Address>
+		<Phone>123</Phone>
+		<DiscountRate>50</DiscountRate>
 	</Customer>
 </Customers>

@@ -14,5 +14,6 @@ namespace Service
         Task EditCustomerAsync(Customer customer);
         Task<Customer?> GetCustomerByIdAsync(string id);
         Task AddRangeCustomersWithXMLOrJson(IFormFile file);
+        Task DeleteCustomer(string id);
     }
 }

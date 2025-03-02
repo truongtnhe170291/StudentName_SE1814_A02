@@ -1,25 +1,100 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+	ViewData["Title"] = "Home page";
 }
-
+<!-- Modal cho chức năng Edit -->
+<div id="editCustomerModal" class="modal" style="display:none;">
+	<div class="modal-content">
+		<span class="close" onclick="closeEditModal()">×</span>
+		<h2>Edit Customer</h2>
+		<form id="editCustomerForm" method="post" asp-page-handler="EditCustomer">
+			<input type="hidden" id="editCustomerId" name="Id" />
+			<div class="form-group">
+				<label for="editCustomerName">Customer Name:</label>
+				<input type="text" id="editCustomerName" name="CustomerName" class="form-control" required />
+			</div>
+			<div class="form-group">
+				<label for="editAddress">Address:</label>
+				<input type="text" id="editAddress" name="Address" class="form-control" required />
+			</div>
+			<div class="form-group">
+				<label for="editPhone">Phone Number:</label>
+				<input type="text" id="editPhone" name="Phone" class="form-control" required />
+			</div>
+			<div class="form-group">
+				<label for="editDiscountRate">DiscountRate:</label>
+				<input type="number" id="editDiscountRate" name="DiscountRate" min="0" max="100" class="form-control" required />
+			</div>
+			<button type="submit" class="btn btn-primary">Edit</button>
+		</form>
+	</div>
+</div>
+<!-- Modal cho chức năng Detailts -->
+<div id="detailsCustomerModal" class="modal" style="display:none;">
+	<div class="modal-content">
+		<span class="close" onclick="closeDetailsModal()">×</span>
+		<h2>Customer Details</h2>
+			<div class="form-group">
+				<label for="editCustomerName">Customer Name:</label>
+			<input type="text" id="detailsCustomerName" class="form-control" readonly />
+			</div>
+			<div class="form-group">
+				<label for="editAddress">Address:</label>
+			<input type="text" id="detailsAddress" name="Address" class="form-control" readonly />
+			</div>
+			<div class="form-group">
+				<label for="editPhone">Phone Number:</label>
+			<input type="text" id="detailsPhone" name="Phone" class="form-control" readonly />
+			</div>
+			<div class="form-group">
+				<label for="editDiscountRate">DiscountRate:</label>
+			<input type="number" id="detailsDiscountRate" name="DiscountRate" min="0" max="100" class="form-control" readonly />
+			</div>
+	</div>
+</div>
+<!-- Modal cho việc thêm khách hàng mới -->
+<div id="addCustomerModal" class="modal" style="display:none;">
+	<div class="modal-content">
+		<span class="close">&times;</span>
+		<h2>Add New Customer</h2>
+		<form id="addCustomerForm" method="post" asp-page-handler="AddCustomer">
+			<div class="form-group">
+				<label for="customerName">Customer Name:</label>
+				<input type="text" id="customerName" name="CustomerName" class="form-control" required />
+			</div>
+			<div class="form-group">
+				<label for="address">Address:</label>
+				<input type="text" id="address" name="Address" class="form-control" required />
+			</div>
+			<div class="form-group">
+				<label for="phone">Phone Number:</label>
+				<input type="text" id="phone" name="Phone" class="form-control" required />
+			</div>
+			<div class="form-group">
+				<label for="discountRate">DiscountRate:</label>
+				<input type="number" id="discountRate" name="DiscountRate" min="0" max="60" class="form-control" required />
+			</div>
+			<button type="submit" class="btn btn-primary">Add New Customer</button>
+		</form>
+	</div>
+</div>
 <h1 class="text-center">Welcome to Assignment 3</h1>
 <h2 class="text-center">Customer Manager</h2>
 
 <!-- Khu vực tìm kiếm và tải lên tệp -->
 <div class="search-upload-section">
-    <form method="get" class="form-inline">
-        <label for="discountRate">Discount rate:</label>
-        <input type="number" id="discountRate" name="discountRate" min="0" max="100" class="form-control" />
-        <button type="submit" class="btn btn-secondary">Search</button>
-    </form>
+	<form method="get" class="form-inline">
+		<label for="discountRate">Discount rate:</label>
+		<input type="number" id="discountRate" name="discountRate" min="0" max="100" class="form-control" />
+		<button type="submit" class="btn btn-secondary">Search</button>
+	</form>
 
-    <form method="post" enctype="multipart/form-data" class="form-inline">
-        <input type="file" name="file" accept=".json,.xml" class="form-control-file" />
-        <button type="submit" asp-page-handler="AddJson" class="btn btn-secondary">Add Customers in Json File</button>
-        <button type="submit" asp-page-handler="AddXml" class="btn btn-secondary">Add Customers in XML File</button>
-    </form>
+	<form method="post" enctype="multipart/form-data" class="form-inline">
+		<input type="file" name="file" accept=".json,.xml" class="form-control-file" />
+		<button type="submit" class="btn btn-secondary">Add Customers in Json File</button>
+		<button type="submit" class="btn btn-secondary">Add Customers in XML File</button>
+	</form>
 </div>
 
 <!-- Tóm tắt danh sách khách hàng -->
@@ -28,32 +103,116 @@
 <!-- Bảng danh sách khách hàng -->
 <h3>List view customer below:</h3>
 <table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>CustomerName</th>
-            <th>Address</th>
-            <th>Phone</th>
-            <th>DiscountRate</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var customer in Model.Customers)
-        {
-            <tr>
-                <td>@customer.CustomerName</td>
-                <td>@customer.Address</td>
-                <td>@customer.Phone</td>
-                <td>@customer.DiscountRate</td>
-                <td>
-                    <a asp-page="/Edit" asp-route-id="@customer.CustomerId">Edit</a> |
-                    <a asp-page="/Details" asp-route-id="@customer.CustomerId">Details</a> |
-                    <a asp-page="/Delete" asp-route-id="@customer.CustomerId">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
+	<thead>
+		<tr>
+			<th>CustomerName</th>
+			<th>Address</th>
+			<th>Phone</th>
+			<th>DiscountRate</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var customer in Model.Customers)
+		{
+			<tr>
+				<td>@customer.CustomerName</td>
+				<td>@customer.Address</td>
+				<td>@customer.Phone</td>
+				<td>@customer.DiscountRate</td>
+				<td>
+					<a href="javascript:void(0);" onclick="showEditCustomerModal('@customer.CustomerId', '@customer.CustomerName', '@customer.Address', '@customer.Phone', '@customer.DiscountRate')">Edit</a> |
+					<a href="javascript:void(0);" onclick="showDetailsCustomerModal('@customer.CustomerId', '@customer.CustomerName', '@customer.Address', '@customer.Phone', '@customer.DiscountRate')">Details</a> |
+					<a asp-page="/Index" asp-route-id="@customer.CustomerId" asp-page-handler="DeleteCustomer">Delete</a>
+				</td>
+			</tr>
+		}
+	</tbody>
 </table>
 
 <!-- Liên kết tạo khách hàng mới -->
-<a asp-page="/Create">Create New</a>
+<button onclick="showAddCustomerModal()" class="btn btn-primary">Add new customer</button>
+@section Scripts {
+	<script>
+		function showEditCustomerModal(customerId, customerName, address, phone, discountRate) {
+			document.getElementById("editCustomerId").value = customerId;
+			document.getElementById("editCustomerName").value = customerName;
+			document.getElementById("editAddress").value = address;
+			document.getElementById("editPhone").value = phone;
+			document.getElementById("editDiscountRate").value = discountRate;
+			document.getElementById("editCustomerModal").style.display = "flex";
+		}
+
+		function closeEditModal() {
+			document.getElementById("editCustomerModal").style.display = "none";
+		}
+
+		// Đóng modal khi nhấp ra ngoài
+		window.onclick = function (event) {
+			var modal = document.getElementById("editCustomerModal");
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+	</script>
+	<script>
+		function showDetailsCustomerModal(customerId, customerName, address, phone, discountRate) {
+			document.getElementById("detailsCustomerName").value = customerName;
+			document.getElementById("detailsAddress").value = address;
+			document.getElementById("detailsPhone").value = phone;
+			document.getElementById("detailsDiscountRate").value = discountRate;
+			document.getElementById("detailsCustomerModal").style.display = "flex";
+		}
+
+		function closeDetailsModal() {
+			document.getElementById("detailsCustomerModal").style.display = "none";
+		}
+
+		// Đóng modal khi nhấp ra ngoài
+		window.onclick = function (event) {
+			var modal = document.getElementById("editCustomerModal");
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+	</script>
+	<script>
+		// Lấy modal và các phần tử
+		var modal = document.getElementById("addCustomerModal");
+		var span = document.getElementsByClassName("close")[0];
+
+		// Hàm hiển thị modal
+		function showAddCustomerModal() {
+			modal.style.display = "flex";
+		}
+
+		// Khi nhấp vào nút đóng (x), ẩn modal
+		// span.onclick = function () {
+		// 	modal.style.display = "none";
+		// }
+
+		// Khi nhấp ra ngoài modal, ẩn modal
+		window.onclick = function (event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+	</script>
+	<script>
+		const connection = new signalR.HubConnectionBuilder()
+			.withUrl("/signalrServer")
+			.build();
+
+		connection.on("ReceiveCustomerUpdate", (customerId) => {
+			console.log(`Khách hàng ID ${customerId} đã được cập nhật`);
+			// Ví dụ: tải lại trang hoặc cập nhật danh sách
+			window.location.reload();
+		});
+
+		connection.on("ReceiveDetailView", (customerId) => {
+			console.log(`Có người đang xem chi tiết khách hàng ID: ${customerId}`);
+		});
+
+		connection.start().catch(err => console.error(err));
+	</script>
+}

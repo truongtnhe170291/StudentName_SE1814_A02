@@ -1,14 +1,20 @@
 [
   {
-    "Name": "Nguyen Van D",
+    "CustomerName": "Nguyen Van D",
+    "Address": "HN",
+    "Phone": "123",
     "DiscountRate": 20
   },
   {
-    "Name": "Tran Thi E",
+    "CustomerName": "Tran Thi E",
+    "Address": "HCM",
+    "Phone": "1200003",
     "DiscountRate": 40
   },
   {
-    "Name": "Le Van G",
+    "CustomerName": "Le Van G",
+    "Address": "HNH",
+    "Phone": "123",
     "DiscountRate": 50
   }
 ]

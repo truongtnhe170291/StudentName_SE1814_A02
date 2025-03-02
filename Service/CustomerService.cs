@@ -42,9 +42,7 @@ namespace Service
             {
                 foreach (var customer in customers)
                 {
-                    await repository.AddCustomer(customer);
-                    // Gửi thông báo qua SignalR
-                    await _hubContext.Clients.All.SendAsync("ReceiveCustomerUpdate", customer.CustomerId);
+                    await CreateCustomerAsync(customer);
                 }
             }
         }
@@ -60,7 +58,13 @@ namespace Service
             await _hubContext.Clients.All.SendAsync("ReceiveCustomerUpdate", customer.CustomerId);
         }
 
-        public async Task EditCustomerAsync(Customer customer)
+		public async Task DeleteCustomer(string id)
+		{
+			await repository.DeleteCustomer(id);
+			await _hubContext.Clients.All.SendAsync("ReceiveCustomerUpdate", id);
+		}
+
+		public async Task EditCustomerAsync(Customer customer)
         {
             await repository.UpdateCustomer(customer);
             await _hubContext.Clients.All.SendAsync("ReceiveCustomerUpdate", customer.CustomerId);
