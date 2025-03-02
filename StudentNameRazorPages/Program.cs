@@ -1,5 +1,7 @@
 using DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
+using Repository;
+using Service;
 using Service.HubService;
 
 namespace StudentNameRazorPages
@@ -17,7 +19,8 @@ namespace StudentNameRazorPages
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
             builder.Services.AddSignalR();
-
+            builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+            builder.Services.AddScoped<ICustomerService, CustomerService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
