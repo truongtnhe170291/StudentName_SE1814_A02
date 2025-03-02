@@ -16,6 +16,16 @@ namespace Repository
         {
             _context = context;
         }
+        public List<Customer> GetCustomersWithDiscount(int discountRate)
+        {
+            if (discountRate <= 0 || discountRate > 60)
+            {
+                return _context.Customers.ToList();
+            }
+            return _context.Customers
+                .Where(c => c.DiscountRate <= discountRate)
+                .ToList();
+        }
         public async Task AddCustomer(Customer customer)
         {
             _context.Customers.Add(customer);

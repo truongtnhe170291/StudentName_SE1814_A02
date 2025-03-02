@@ -9,6 +9,7 @@ namespace Repository
 {
     public interface ICustomerRepository
     {
+        public List<Customer> GetCustomersWithDiscount(int discountRate);
         Task AddCustomer(Customer customer);
         Task UpdateCustomer(Customer customer);
         Task<Customer?> GetCustomerById(string id);

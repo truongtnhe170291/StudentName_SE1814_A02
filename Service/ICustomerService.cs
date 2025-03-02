@@ -10,6 +10,7 @@ namespace Service
 {
     public interface ICustomerService
     {
+        public List<Customer> GetCustomersWithDiscount(int discountRate);
         Task CreateCustomerAsync(Customer customer);
         Task EditCustomerAsync(Customer customer);
         Task<Customer?> GetCustomerByIdAsync(string id);

@@ -19,6 +19,11 @@ namespace Service
             this._hubContext = hubContext;
         }
 
+        public List<Customer> GetCustomersWithDiscount(int discountRate)
+        {
+            return repository.GetCustomersWithDiscount(discountRate);
+        }
+
         public async Task AddRangeCustomersWithXMLOrJson(IFormFile file)
         {
             var fileExtension = Path.GetExtension(file.FileName).ToLower();
